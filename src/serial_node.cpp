@@ -18,6 +18,7 @@ void manage_connection(const ros::TimerEvent& event, ros::NodeHandle& n, std::st
   static int previous_success = 1;
 
   while(ros::ok()) {
+    ROS_DEBUG_STREAM("Opening serial port: " << port);
     int serial_fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_NDELAY | O_NONBLOCK);
     
     if (serial_fd == -1) {
@@ -40,8 +41,18 @@ void manage_connection(const ros::TimerEvent& event, ros::NodeHandle& n, std::st
     options.c_cflag |= CS8; 
 
     options.c_cflag |= (CLOCAL | CREAD);
-    cfsetispeed(&options, B19200);
-    cfsetospeed(&options, B19200);
+    
+    ROS_DEBUG_STREAM("Setting baud rate: " << baud);
+    switch(baud) {
+      case 9600: cfsetispeed(&options, B9600); cfsetospeed(&options, B9600); break;
+      case 19200: cfsetispeed(&options, B19200); cfsetospeed(&options, B19200); break;
+      case 38400: cfsetispeed(&options, B38400); cfsetospeed(&options, B38400); break;
+      case 57600: cfsetispeed(&options, B57600); cfsetospeed(&options, B57600); break;
+      case 115200: cfsetispeed(&options, B115200); cfsetospeed(&options, B115200); break;
+      default:
+        ROS_FATAL_STREAM("Unsupported baud rate: " << baud);
+        ros::shutdown();
+    }
     options.c_iflag = 0;
     options.c_oflag = 0;
     options.c_lflag = 0;
@@ -52,7 +63,7 @@ void manage_connection(const ros::TimerEvent& event, ros::NodeHandle& n, std::st
     // Successful connection setup; kick off servicing thread.
     ROS_INFO_STREAM("Successfully connected on " << port << "."); 
     previous_success = 1;
-    rx_thread_start(n, serial_fd, frame_id); 
+    rx_thread_start(n, serial_fd, frame_id, 1000000000 / baud * 10); 
     break;
 
   close_serial:
