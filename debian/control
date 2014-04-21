@@ -1,0 +1,12 @@
+Source: ros-indigo-nmea-comms
+Section: misc
+Priority: extra
+Maintainer: Mike Purvis <mpurvis@clearpathrobotics.com>
+Build-Depends: debhelper (>= 7.0.50~), ros-indigo-catkin, ros-indigo-nmea-msgs, ros-indigo-roscpp, ros-indigo-roslaunch, ros-indigo-roslint, ros-indigo-rostest
+Homepage: http://wiki.ros.org/nmea_comms
+Standards-Version: 3.9.2
+
+Package: ros-indigo-nmea-comms
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-indigo-nmea-msgs, ros-indigo-roscpp
+Description: The nmea_comms package provides helper nodes for transmitting and receiving the NMEA sentences.
