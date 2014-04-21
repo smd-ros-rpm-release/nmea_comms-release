@@ -1,3 +1,22 @@
+## nmea_comms (indigo) - 1.0.1-0
+
+The packages in the `nmea_comms` repository were released into the `indigo` distro by running `/usr/local/bin/bloom-release --track indigo --rosdistro indigo nmea_comms --new-track` on `Mon, 21 Apr 2014 22:39:53 -0000`
+
+The `nmea_comms` package was released.
+
+Version of package(s) in repository `nmea_comms`:
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.0.1-0`
+
+Versions of tools used:
+- bloom version: `0.5.4`
+- catkin_pkg version: `0.2.1`
+- rosdep version: `0.10.25`
+- rosdistro version: `0.3.4`
+- vcstools version: `0.1.33`
+
+
 ## nmea_comms - 0.0.3-0
 
 User `administrator@cpr-unassigned` released the packages in the `nmea_comms` repository by running `/home/administrator/husky_ws/src/bloom_easy/scripts/release` on `Thu, 03 Oct 2013 19:35:37 -0000`
